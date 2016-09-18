@@ -1,0 +1,24 @@
+---
+title: "Rmdfailas"
+author: "MildaPie"
+date: '2016 m rugsėjis 15 d '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Vėžliukas
+
+Su R galima nubraižyti vėžliuką.
+
+Radau http://yihui.name/en/2011/08/the-fun-package-use-r-for-fun/
+
+
+```{r echo=TRUE}
+library(fun)
+demo('RealTurtle', package = 'fun')
+
+```
+
