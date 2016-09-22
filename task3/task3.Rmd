@@ -19,6 +19,5 @@ Radau http://yihui.name/en/2011/08/the-fun-package-use-r-for-fun/
 ```{r echo=TRUE}
 library(fun)
 demo('RealTurtle', package = 'fun')
-
 ```
 
