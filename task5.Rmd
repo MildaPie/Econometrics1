@@ -39,7 +39,7 @@ S_teor <- marginal(St, vars="sum")
 S_teor
 ```
 
-Šio kodo pavyzdį radome knygoje Kerns, G. Jay. 2011. “Introduction to Probability and Statistics Using R.”.
+Šis pavyzdys rastas knygoje Kerns, G. Jay. 2011. “Introduction to Probability and Statistics Using R.”.
 
 3. Iš sugeneruotos imties, padarykite santykinių dažnių lentelę ir gautas reikšmes palyginkite su teorinėmis tikimybėmis. Palyginimui pateikite grafiką ir lentelę, taip, kad būtų patogu lyginti gautus rezultatus.
 
