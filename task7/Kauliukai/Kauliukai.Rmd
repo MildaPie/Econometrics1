@@ -1,0 +1,27 @@
+---
+title: "Kauliukai"
+author: "MildaPie"
+date: '2016 m rugsėjis 30 d '
+output: html_document
+---
+
+``````{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library('prob')
+```
+
+## Kauliukai
+
+ Du žaidėjai žaidžia tokį žaidimą. Pirmasis žaidėjas meta tris kauliukus ir fiksuoja iškritusių taškų sumą. Antrasis žaidėjas ridena du kauliukus ir skaičiuoja iškritusių taškų sumą. Laimi tas žaidėjas, kurio taškų suma yra didesnė. Jeigu taškų sumos yra lygios, tai ekspermentas kartojamas iš naujo (ir taip kartojama tol, kol galiausiai nustatomas laimėtojas). Kokia tikimybė laimėti pirmajam žaidėjui?
+
+```{r}
+
+
+S1 <- rolldie(3, nsides = 6, makespace = TRUE)
+S2 <- rolldie(2, nsides = 6, makespace = TRUE)
+S1 <- addrv(S1, sum = X1 + X2 + X3)
+S2 <- addrv(S2, sum = X1 + X2)
+
+```
+
+

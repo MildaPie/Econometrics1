@@ -1,0 +1,25 @@
+---
+title: "Moneta"
+author: "MildaPie"
+date: '2016 m rugsėjis 30 d '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Moneta
+
+Tarkime metama moneta. Jeigu iškrenta herbas, tai laimite $12$ EUR. Jeigu skaičius, tai pralošiate $10$ EUR. Bus žaidžiama $100$ kartų ir gauti rezultatai sumuojami. Kokia tikimybė jums turėti teigiamą balansą po $100$ kartų? Koks balanso pasikliautinis $95%$ intervalas? Kaip atrodo balanso tankis?
+
+```{r }
+n=100
+seqofct <- sample(c(-10,12), n, replace = TRUE)
+sum(seqofct)
+
+```
+
+Literatura
+http://www.cyclismo.org/tutorial/R/confidence.html
+

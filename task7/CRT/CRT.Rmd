@@ -1,0 +1,27 @@
+---
+title: "CRT"
+author: "MildaPie"
+date: '2016 m rugsėjis 30 d '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## CRT
+
+Generuojame $n$ atsitiktinių dydžių turinčių Beta skirstinį su parametrais $\alpha=\beta=0.5$ Iš šių atsitiktinių dydžių suskaičiuojamas aritmetinis vidurkis. Kaip atrodo vidurkio tankis, kai $n=100$?
+
+```{r }
+
+n=10^5
+samples<-rbeta(n, 0.5, 0.5)
+
+mean(samples)
+n=100
+samples2<-rbeta(n, 0.5, 0.5)
+
+```
+
+

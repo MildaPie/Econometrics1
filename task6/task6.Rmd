@@ -25,7 +25,7 @@ unique(df$user)
 sapply(df,class)
 df$sysTime <- as.Date(df$sysTime , "%m/%d/%y %H:$M")
 sapply(df,class)
-duplicated(df)
+
 
 
 ```
