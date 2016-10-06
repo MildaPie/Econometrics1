@@ -1,45 +1,116 @@
 ---
 title: "task6"
 author: "MildaPie"
-date: '2016 m rugsÄ—jis 23 d '
+date: '2016 m rugsëjis 23 d '
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+```{r echo=FALSE}
+library(knitr)
+```
 
 ## Task6
-Nuskaitykite duomenis. UÅ¾tikrinkite, kad duomenÅ³ tipai yra korektiÅ¡ki - jei ne, tai koreguokite. YpatingÄ… dÄ—mesÄ¯ atkreipkite Ä¯ datas.
 
-IÅ¡valykite masyvÄ… nuo "Å¡iukÅ¡liÅ³". Praktikoje retai, kada gaunamas pilnai sutvarkyti duomenys. Taip ir Å¡Ä¯ kartÄ…, jums reikia iÅ¡valyti masyvÄ… nuo galimÅ³ problemÅ³. PavyzdÅ¾iui:
+Nuskaitykite duomenis. Uştikrinkite, kad duomenø tipai yra korektiğki - jei ne, tai koreguokite. Ypatingà dëmesá atkreipkite á datas.
+Iğvalykite masyvà nuo ´ğiukğliø¡. Praktikoje retai, kada gaunamas pilnai sutvarkyti duomenys. Taip ir ğá kartà, jums reikia iğvalyti masyvà nuo galimø problemø. Pavyzdşiui:
+ruoğiant pateikties formà buvo testuojama ar viskas gerai veikia (reikia ádentifikuoti ir pağalinti ğiuo irağus); kai kas galëjo pakartotinai suvesti formas, taip atsirastu duomenø dubliavimas. Net jeigu dubliavimosi nëra, jums reikia tuo ásitikinti. Visada gali bûti ir kitø netikëtø problemø - verta pagalvoti. Susipaşinimas su duomenimis. Jums reikia uştikrinti, kad suprantate kà reiğkia kiekvienas stulpelis. Jeigu abejojate pabandykite padiskutuoti su kolegomis ir priimkite geriausià spëjimà.
 
-ruoÅ¡iant pateikties formÄ… buvo testuojama ar viskas gerai veikia (reikia Ä¯dentifikuoti ir paÅ¡alinti Å¡iuo iraÅ¡us);
-kai kas galÄ—jo pakartotinai suvesti formas, taip atsirastu duomenÅ³ dubliavimas. Net jeigu dubliavimosi nÄ—ra, jums reikia tuo Ä¯sitikinti.
-Visada gali bÅ«ti ir kitÅ³ netikÄ—tÅ³ problemÅ³ - verta pagalvoti.
-SusipaÅ¾inimas su duomenimis. Jums reikia uÅ¾tikrinti, kad suprantate kÄ… reiÅ¡kia kiekvienas stulpelis. Jeigu abejojate pabandykite padiskutuoti su kolegomis ir priimkite geriausiÄ… spÄ—jimÄ….
 
+### Nuskaitome duomenis
 ```{r }
-df<-read.csv("U:/Desktop/R_programing_swirlResults.csv", stringsAsFactors = FALSE)
+df<-read.csv("R_programing_swirlResults.csv", stringsAsFactors = FALSE)
 unique(df$user)
 sapply(df,class)
+```
+Pakeièiam datos klasæ.
+```{r }
 df$sysTime <- as.Date(df$sysTime , "%m/%d/%y %H:$M")
 sapply(df,class)
+```
+Iğtrinam, kas nereikalinga.
+```{r }
+ind<-df$user%in%c("1vbutkus","aaa","testas")
+df<-df[!ind,]
+unique(df$user)
+```
+Sukabinamm Justinos ir Gyèio darbus.
+```{r }
 
-
-
+ind2<-df$user%in%c("j","ju","juste")
+df$user[ind2] <- "Juste"
+df$user[df$user == "gyse3054"] <- "gyse"
+unique(df$user)
+userdata<-df$user
+lessondata<-df$lesson_name
+qdata<-df$question_number
+correctdata<-df$correct
+attemptdata<-df$attempt
+partialdata<-cbind(userdata, lessondata, qdata, correctdata, attemptdata)
+ f<-duplicated(partialdata)
+ mean(f) ## yra dubliu
+ df<-df[!f,]
+ userdata<-df$user
+lessondata<-df$lesson_name
+qdata<-df$question_number
+correctdata<-df$correct
+attemptdata<-df$attempt
+partialdata<-cbind(userdata, lessondata, qdata, correctdata, attemptdata)
+ f<-duplicated(partialdata)
+ mean(f) ## nera dubliu
+ sk<-df
 ```
 
-## Including Plots
-Jums reikia atsakyti Ä¯ svarbiausius praktinius klausimus:
+## Praktinai klausimai
+Jums reikia atsakyti á svarbiausius praktinius klausimus:
 
-Kurie studentai yra pilnai atlikÄ™ visas swirl uÅ¾duotis, t.y. pilnai atliktos visos uÅ¾duotis nepraleidÅ¾iant jokiÅ³ klausimÅ³.
+Kurie studentai yra pilnai atliko visas swirl uşduotis, t.y. pilnai atliktos visos uÅ¾duotis nepraleidÅşiant jokiø klausimø.
 
-Reikia identifikuoti ir tuos, kurie ne pilnai viskÄ… atliko. Kiekvienam skolininkui reikia identifikuoti kiek pamokÅ³ yra nepilnai atsiskaitytÄ… ir kiek klausimÅ³ yra praleista.
+Reikia identifikuoti ir tuos, kurie ne pilnai viskà atliko. Kiekvienam skolininkui reikia identifikuoti kiek pamokos yra nepilnai atsiskaitytos ir kiek klausimø yra praleista.
 
 ```{r }
 
+table(df[df$skipped==TRUE,7])
+#m
+#x<-data.frame(m)
+#ind4<-x[,1]
+ind3<-df$user%in%c("Dariukxas","Domante Bulovaite","gyse","Greta","gretajes","Juste","Karolina","kestous","ogadova","ojautakaite","Raigardas","rokasaleks","SandraKozlovskaja","simonalevickaite", "sindeivydas")
+df<-df[!ind3,]
+d=data.frame(df$user, df$lesson_name)
+
+d2=d[!duplicated(d), ]
+table(d2[,1])
+ 
+```
+Viskà padarë aipe00, zagnyte, emru3000 ir simona1234
+
+Sudarom ne viskà padariusiø studentø lentelæ.
+
+
+
+```{r }
+
+ind5<-df$user%in%c("aipe00", "zagnyte", "emru3000", "simona1234")
+df<-df[!ind5,]
+data<-read.csv("R_programing_swirlResults.csv", stringsAsFactors = FALSE)
+sk1=data.frame(sk$user, sk$lesson_name)
+sk2=sk1[!duplicated(sk1), ]
+```
+Kiek pamokø padaryta.
+```{r }
+table(sk2[,1])
+```
+Kiek praleista.
+```{r }
+table(sk[sk$skipped==TRUE,7])
 
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+Naudota literatura:
+
+Agnës Zavackaitës darbas
+http://stackoverflow.com/questions/5824173/replace-a-value-in-a-data-frame-based-on-a-conditional-if-statement-in-r
+
