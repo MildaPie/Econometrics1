@@ -1,7 +1,7 @@
 ---
 title: "Kauliukai"
 author: "MildaPie"
-date: '2016 m rugsÄ—jis 30 d '
+date: '2016 m rugsÄjis 30 d '
 output: html_document
 ---
 
@@ -12,16 +12,53 @@ library('prob')
 
 ## Kauliukai
 
- Du Å¾aidÄ—jai Å¾aidÅ¾ia tokÄ¯ Å¾aidimÄ…. Pirmasis Å¾aidÄ—jas meta tris kauliukus ir fiksuoja iÅ¡kritusiÅ³ taÅ¡kÅ³ sumÄ…. Antrasis Å¾aidÄ—jas ridena du kauliukus ir skaiÄiuoja iÅ¡kritusiÅ³ taÅ¡kÅ³ sumÄ…. Laimi tas Å¾aidÄ—jas, kurio taÅ¡kÅ³ suma yra didesnÄ—. Jeigu taÅ¡kÅ³ sumos yra lygios, tai ekspermentas kartojamas iÅ¡ naujo (ir taip kartojama tol, kol galiausiai nustatomas laimÄ—tojas). Kokia tikimybÄ— laimÄ—ti pirmajam Å¾aidÄ—jui?
+ Du şaidëjai şaidşia toká şaidimà. Pirmasis şaidëjas meta tris kauliukus ir fikuoja iğkritusiø tağkø sumà. Antrasis şaidëjas ridena du kauliukus ir skiaèiuoja iğkrituiø tağkø sumà. Laimi tas şaidëjas, kurio tağkø suma yra didesnë. Jeigu tağkø sumos yra lygios, tai, tai ekspermentas kartojamas iğ naujo (ir taip kartojama tol, kol galiausiai nustatomas laimëtojas). Kokia tikimybë laimëti pirmajam şaidëjui?
 
 ```{r}
+########
+# n=100
+# S1 <- replicate(n, sum(sample(1:6,3, replace = TRUE)))
+ #S2 <- replicate(n, sum(sample(1:6,2, replace = TRUE)))
+ #S1 <- addrv(S1, sum = X1 + X2 + X3)
+ #S2 <- addrv(S2, sum = X1 + X2)
+# a=0
+ #i=1
+ #while (i <n+1) {
+    
+  
+  #if ( S1[i]>S2[i]) {
+   #   a=a+1
+  #  i=i+1
+   #} else if ( S1[i]<S2[i]) {
+  #    a=a+0
+   #   i=i+1
+   #} else 
+#      i=i
+ # }
+#a
+#######
+n <- 100000
+i <- 1
 
+zaid_1 <- c(rep(0, times=n))
+zaid_2 <- c(rep(0, times=n))
+laim_1 <- c(rep(0, times=n))
 
-S1 <- rolldie(3, nsides = 6, makespace = TRUE)
-S2 <- rolldie(2, nsides = 6, makespace = TRUE)
-S1 <- addrv(S1, sum = X1 + X2 + X3)
-S2 <- addrv(S2, sum = X1 + X2)
+while (i<n+1) {
+  zaid_1[i] <- sum(sample(1:6, 3, replace=TRUE))
+  zaid_2[i] <- sum(sample(1:6, 2, replace=TRUE))
+  if (zaid_1[i] > zaid_2[i]) {
+    laim_1[i] <- 1
+    i = i+1
+  }
+  else if (zaid_1[i] < zaid_2[i]) {
+    laim_1[i] <- 0
+    i = i+1
+  }
+  else i = i
+}
 
+mean(laim_1)
 ```
 
-
+Nusirasyta nuo Simonos Gritytes

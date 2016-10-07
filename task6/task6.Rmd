@@ -107,8 +107,14 @@ Kiek praleista.
 table(sk[sk$skipped==TRUE,7])
 
 ```
+Kurios uþduotys sunkiausios? Pagal klaidingus bandymus.
+```{r }
+table(sk[sk$correct==FALSE,9])
 
 
+
+
+```
 Naudota literatura:
 
 Agnës Zavackaitës darbas
