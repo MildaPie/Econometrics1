@@ -1,7 +1,7 @@
 ---
 title: "CRT"
 author: "MildaPie"
-date: '2016 m rugsÄjis 30 d '
+date: '2016 m rugsëjis 30 d '
 output: html_document
 ---
 
@@ -11,14 +11,22 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## CRT
 
-Generuojame $n$ atsitiktiniu dydziu turinciu Beta skirstini su parametrais $\alpha=\beta=0.5$ Is  atsitiktiniu didzio aritmetinis vidurkis. Kaip atrodo vidurkio tankis, kai $n=100$?
+Generuojame $n$ atsitiktiniø dydþiø turinèiø Beta skirstiná su parametrais $\alpha=\beta=0.5$ Ið ðiø atsitiktiniø dydþiø suskaièiuojamas aritmetinis vidurkis. Kaip atrodo aritmetinio vidurkio tankis, kai $n=100$?
 
 ```{r }
 
 n=10^5
 samples<-rbeta(n, 0.5, 0.5)
 
+```
+Atsitiktiniø dydþiø aritmetinis vidurkis.
+
+```{r }
 mean(samples)
+```
+Aritmetinio vidurkio tankis, kai $n=100$.
+
+```{r }
 n=100
 samples2<-rbeta(n, 0.5, 0.5)
 xbar=replicate(n, mean(samples2))
@@ -26,4 +34,5 @@ xbar=replicate(n, mean(samples2))
 plot(density(xbar))
 ```
 
+Paskutinë dalis atlikta paskaitos metu.
 

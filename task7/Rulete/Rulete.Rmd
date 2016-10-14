@@ -1,7 +1,7 @@
 ---
 title: "Rulete"
 author: "MildaPie"
-date: '2016 m rugsÄ—jis 30 d '
+date: '2016 m rugsëjis 30 d '
 output: html_document
 ---
 
@@ -11,10 +11,31 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Rulete
 
-NagrinÄ—kime standartinÄ™ kazino ruletÄ™. Kokia tikimybÄ—, kad po $1000$ vienodÅ³ statymÅ³ ant vienos pasirinktos spalvos, bus teigiamas balansas? Raskite apytikslÄ™ $x$ reikÅ¡mÄ™, kuriai galioja nelygybe $P(balansas<x) = 0.25$.
+Nagrinëkime standartinæ kazino ruletæ. Kokia tikimybë, kad po $1000$ vienodø statymø ant vienos pasirinktos spalvos, bus teigiamas balansas? Raskite apytikslæ $x$ reikğmæ, kuriai galioja nelygybe $P(balansas<x) = 0.25$.
 
+
+Kadangi Europietiğkoje ruletëje yra 1 şalias, 18 juodø ir 18 raudonø langeliø, naudosime atitinkamas tikimybes.
 ```{r }
+n<-1000
+m<-10000
+df<-replicate(m, sum(sample(c(-1,1), n, prob = c(19/37, 18/37), replace = TRUE)))
+dt<-df>0
+ 
+```
+ Tikimybë, kad balansas bus teigiamas.
+ 
+```{r}
+ sum(dt)/m
+``` 
+             
+Raskite apytikslæ $x$ reikğmæ, kuriai galioja nelygybe $P(balansas<x) = 0.25$.
+ 
+```{r}
+ quantile(df, prob=0.25)
+``` 
 
 ```
 
+Literatûra:
+https://en.wikipedia.org/wiki/Roulette
 
