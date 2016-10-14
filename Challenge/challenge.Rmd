@@ -16,6 +16,10 @@ cenzura
 dt<-read.csv("cenzura.csv")
 dt<-na.omit(dt)
 hist(dt[2:10000,])
+axis(side=1, at=seq(0,5, 1))
+```
+Spėjam, kad vidurkis 3.
+```{r }
 dt1<-dt<3
 var(dt[dt1==TRUE])
 ```
