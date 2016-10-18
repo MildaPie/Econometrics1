@@ -6,7 +6,7 @@ output: html_document
 ---
 
 
-Didžioji dalis nusirašyta nuo Simonos Gritytės, Orintos Jautakaitės, Sandros Kozlovskajos, Agnės Zavackaitės
+Didžioji dalis nusirašyta nuo Simonos Gritytės, Orintos Jautakaitės, Sandros Kozlovskajos, Agnės Zavackaitės, kai kas rodyta paskaitoje.
 
 
 ```{r setup, include=FALSE}
