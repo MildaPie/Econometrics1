@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Rulete
+## Ruletë
 
 Nagrinëkime standartinæ kazino ruletæ. Kokia tikimybë, kad po $1000$ vienodø statymø ant vienos pasirinktos spalvos, bus teigiamas balansas? Raskite apytikslæ $x$ reikðmæ, kuriai galioja nelygybe $P(balansas<x) = 0.25$.
 
@@ -37,5 +37,6 @@ Raskite apytikslæ $x$ reikðmæ, kuriai galioja nelygybe $P(balansas<x) = 0.25$.
 ```
 
 Literatûra:
+
 https://en.wikipedia.org/wiki/Roulette
 

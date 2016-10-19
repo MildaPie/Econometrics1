@@ -123,7 +123,7 @@ $(document).ready(function () {
 
 
 <div id="rulete" class="section level2">
-<h2>Rulete</h2>
+<h2>Ruletė</h2>
 <p>Nagrinėkime standartinę kazino ruletę. Kokia tikimybė, kad po <span class="math inline">\(1000\)</span> vienodų statymų ant vienos pasirinktos spalvos, bus teigiamas balansas? Raskite apytikslę <span class="math inline">\(x\)</span> reikšmę, kuriai galioja nelygybe <span class="math inline">\(P(balansas&lt;x) = 0.25\)</span>.</p>
 <p>Kadangi Europietiškoje ruletėje yra 1 žalias, 18 juodų ir 18 raudonų langelių, naudosime atitinkamas tikimybes.</p>
 <pre class="r"><code>n&lt;-1000
@@ -132,13 +132,14 @@ df&lt;-replicate(m, sum(sample(c(-1,1), n, prob = c(19/37, 18/37), replace = TRU
 dt&lt;-df&gt;0</code></pre>
 <p>Tikimybė, kad balansas bus teigiamas.</p>
 <pre class="r"><code> sum(dt)/m</code></pre>
-<pre><code>## [1] 0.1872</code></pre>
+<pre><code>## [1] 0.1887</code></pre>
 <p>Raskite apytikslę <span class="math inline">\(x\)</span> reikšmę, kuriai galioja nelygybe <span class="math inline">\(P(balansas&lt;x) = 0.25\)</span>.</p>
 <pre class="r"><code> quantile(df, prob=0.25)</code></pre>
 <pre><code>## 25% 
 ## -48</code></pre>
 <p>```</p>
-<p>Literatūra: <a href="https://en.wikipedia.org/wiki/Roulette" class="uri">https://en.wikipedia.org/wiki/Roulette</a></p>
+<p>Literatūra:</p>
+<p><a href="https://en.wikipedia.org/wiki/Roulette" class="uri">https://en.wikipedia.org/wiki/Roulette</a></p>
 </div>
 
 

@@ -118,5 +118,6 @@ table(sk[sk$correct==FALSE,9])
 Naudota literatura:
 
 Agnës Zavackaitës darbas
+
 http://stackoverflow.com/questions/5824173/replace-a-value-in-a-data-frame-based-on-a-conditional-if-statement-in-r
 
