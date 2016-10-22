@@ -1,0 +1,57 @@
+---
+title: "task10"
+author: "MildaPie"
+date: '2016 m spalis 21 d '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Statistinių hipotezių tikrinimas
+
+Užduotis skirta išmokti tikrinti paprastą statistinę hipotezę ir suprasti jos rezultatus.
+
+a) Tegul $x_1, ..., X_{100} \sim N(1, 2)$. Susigeneruokite tokią imtį ir patikrinkite nulinę hipotezę, kad $H_0: \mu=1$, su alternatyva, kad $\mu\neq 1$. Tam rekalinga funkcija t.test. Detaliai paaiškinkite ką reiškia funkcijos išvestyje pateikti skaičiai.
+
+```{r }
+X<-rnorm(100, 1, sqrt(2))
+#H_0: \mu=1 H_1:\mu\neq 1
+mu0=1
+t.test.twoTails <- function(data, mu0, alpha)
+{
+t.stat <- abs((mean(X) - mu0)) / (sqrt(var(X) / length(X)))
+    dof <- length(X) - 1
+    t.critical <- qt(1-alpha/2, df= dof) #Es alpha 0.05 -> -1.9599 (df=Inf)
+    p.value <- 2*(1-pt(t.stat, df= dof))
+    
+    if(t.stat >= t.critical)
+    {
+        print("Reject H0")
+    }
+    else
+    {
+        print("Accept H0")
+    }
+    print('T statistic')
+    print(t.stat)
+    print('T critical values')
+    print(c(-t.critical,t.critical))
+    print('P value')
+    print(p.value)
+    print("#####################")
+    
+    return(t.stat)
+}
+t.test.twoTails(data_vector, 73, 0.05)
+```
+b) Kartokite a) dalies generavima daug kartų (pvz.10^4) ir suskaičiuokite kiek atvejų buvo atmesta nulinė hipotezė? Išreiškite šį skaičių procentais. Kokią išvadą galite padaryti?
+
+```{r }
+n=10^4
+
+```
+## Literatūra
+
+https://www.r-bloggers.com/hypothesis-testing-on-normally-distributed-data-in-r/
