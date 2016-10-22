@@ -125,55 +125,44 @@ $(document).ready(function () {
 <div id="statistiniu-hipoteziu-tikrinimas" class="section level2">
 <h2>Statistinių hipotezių tikrinimas</h2>
 <p>Užduotis skirta išmokti tikrinti paprastą statistinę hipotezę ir suprasti jos rezultatus.</p>
-<ol style="list-style-type: lower-alpha">
-<li>Tegul <span class="math inline">\(x_1, ..., X_{100} \sim N(1, 2)\)</span>. Susigeneruokite tokią imtį ir patikrinkite nulinę hipotezę, kad <span class="math inline">\(H_0: \mu=1\)</span>, su alternatyva, kad <span class="math inline">\(\mu\neq 1\)</span>. Tam rekalinga funkcija t.test. Detaliai paaiškinkite ką reiškia funkcijos išvestyje pateikti skaičiai.</li>
-</ol>
+<p>Tegul x1,…,X100∼N(1,2)x1,…,X100∼N(1,2). Susigeneruokite tokią imtį ir patikrinkite nulinę hipotezę, kad H0:μ=1H0:μ=1, su alternatyva, kad μ≠1μ≠1. Tam rekalinga funkcija t.test. Detaliai paaiškinkite ką reiškia funkcijos išvestyje pateikti skaičiai. Reikšmingumo lygmuo 0,05.</p>
 <pre class="r"><code>X&lt;-rnorm(100, 1, sqrt(2))
-#H_0: \mu=1 H_1:\mu\neq 1
-mu0=1
-t.test.twoTails &lt;- function(data, mu0, alpha)
-{
-t.stat &lt;- abs((mean(X) - mu0)) / (sqrt(var(X) / length(X)))
-    dof &lt;- length(X) - 1
-    t.critical &lt;- qt(1-alpha/2, df= dof) #Es alpha 0.05 -&gt; -1.9599 (df=Inf)
-    p.value &lt;- 2*(1-pt(t.stat, df= dof))
-    
-    if(t.stat &gt;= t.critical)
+t.stat&lt;-t.test(X,mu=1) # Ho: mu=1
+alpha =0.05
+t.critical &lt;- qt(1-alpha/2, df= 99)
+if(abs(t.stat$statistic) &gt;= t.critical)
     {
-        print(&quot;Reject H0&quot;)
+        print(&quot;Atmesti H0&quot;)
     }
-    else
-    {
-        print(&quot;Accept H0&quot;)
-    }
-    print('T statistic')
-    print(t.stat)
-    print('T critical values')
-    print(c(-t.critical,t.critical))
-    print('P value')
-    print(p.value)
-    print(&quot;#####################&quot;)
-    
-    return(t.stat)
-}
-t.test.twoTails(data_vector, 73, 0.05)</code></pre>
-<pre><code>## [1] &quot;Reject H0&quot;
-## [1] &quot;T statistic&quot;
-## [1] 498.1899
-## [1] &quot;T critical values&quot;
-## [1] -1.984217  1.984217
-## [1] &quot;P value&quot;
-## [1] 0
-## [1] &quot;#####################&quot;</code></pre>
-<pre><code>## [1] 498.1899</code></pre>
-<ol start="2" style="list-style-type: lower-alpha">
-<li>Kartokite a) dalies generavima daug kartų (pvz.10^4) ir suskaičiuokite kiek atvejų buvo atmesta nulinė hipotezė? Išreiškite šį skaičių procentais. Kokią išvadą galite padaryti?</li>
-</ol>
-<pre class="r"><code>n=10^4</code></pre>
+
+   {
+      print(&quot;Priimti H0&quot;)
+   }</code></pre>
+<pre><code>## [1] &quot;Priimti H0&quot;</code></pre>
+<p>Detaliai paaiškinkite ką reiškia t.test funkcijos išvestyje pateikti skaičiai.</p>
+<pre class="r"><code>t.test(X,mu=1)</code></pre>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  X
+## t = -0.16741, df = 99, p-value = 0.8674
+## alternative hypothesis: true mean is not equal to 1
+## 95 percent confidence interval:
+##  0.6929779 1.2592469
+## sample estimates:
+## mean of x 
+## 0.9761124</code></pre>
+<p>Kartokite a) dalies generavima daug kartų (pvz.10^4) ir suskaičiuokite kiek atvejų buvo atmesta nulinė hipotezė? Išreiškite šį skaičių procentais. Kokią išvadą galite padaryti?</p>
+<pre class="r"><code>n=10^4
+ts = replicate(n,t.test(rnorm(100, 1,2), mu=1)$statistic)
+dt&lt;-abs(ts)&lt;t.critical
+
+mean(dt)*100</code></pre>
+<pre><code>## [1] 94.49</code></pre>
 </div>
 <div id="literatura" class="section level2">
 <h2>Literatūra</h2>
-<p><a href="https://www.r-bloggers.com/hypothesis-testing-on-normally-distributed-data-in-r/" class="uri">https://www.r-bloggers.com/hypothesis-testing-on-normally-distributed-data-in-r/</a></p>
+<p><a href="http://statistics.berkeley.edu/computing/r-t-tests" class="uri">http://statistics.berkeley.edu/computing/r-t-tests</a> <a href="https://www.r-bloggers.com/hypothesis-testing-on-normally-distributed-data-in-r/" class="uri">https://www.r-bloggers.com/hypothesis-testing-on-normally-distributed-data-in-r/</a></p>
 </div>
 
 
