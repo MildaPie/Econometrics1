@@ -145,14 +145,14 @@ if(abs(t.stat$statistic) &gt;= t.critical)
 ##  One Sample t-test
 ## 
 ## data:  X
-## t = -0.30556, df = 99, p-value = 0.7606
+## t = 0.56507, df = 99, p-value = 0.5733
 ## alternative hypothesis: true mean is not equal to 1
 ## 95 percent confidence interval:
-##  0.6839732 1.2316833
+##  0.7888422 1.3793128
 ## sample estimates:
 ## mean of x 
-## 0.9578283</code></pre>
-<p>n- imties dydis, a H0 vidurkis, s- imties standartinis nuokrypis.</p>
+##  1.084078</code></pre>
+<p>n- imties dydis, a -H0 vidurkis, s- imties standartinis nuokrypis.</p>
 <p>t -Stjudento kriterijaus statistika. Apskaičiuojama <span class="math inline">\(\frac{\bar{x}-a}{\sqrt{s^2/n}}\)</span></p>
 <p>df- degrees of freedom- laisvės laipsniai. df=n-1</p>
 <p>p-value- p-reikšmė. Tikimybė, kad kriterijaus statistika (tuo atveju, kai H0 teisinga) ne mažesnė už stebimą realizaciją.</p>
@@ -164,7 +164,11 @@ ts = replicate(n,t.test(rnorm(100, 1,2), mu=1)$statistic)
 dt&lt;-abs(ts)&lt;t.critical
 
 mean(dt)*100</code></pre>
-<pre><code>## [1] 95.2</code></pre>
+<pre><code>## [1] 95.27</code></pre>
+<p>Galima daryti išvadą, kad</p>
+<pre class="r"><code>floor(mean(dt)*100)</code></pre>
+<pre><code>## [1] 95</code></pre>
+<p>kartus iš 100 nulinė hipotezė bus neatmesta.</p>
 </div>
 <div id="literatura" class="section level2">
 <h2>Literatūra</h2>

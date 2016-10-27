@@ -39,7 +39,7 @@ Detaliai paaiškinkite ką reiškia t.test funkcijos išvestyje pateikti skaiči
 t.test(X,mu=1)
 
 ```
-n- imties dydis, a H0 vidurkis, s- imties standartinis nuokrypis.
+n- imties dydis, a -H0 vidurkis, s- imties standartinis nuokrypis.
 
 t -Stjudento kriterijaus statistika. Apskaičiuojama $\frac{\bar{x}-a}{\sqrt{s^2/n}}$
 
@@ -61,7 +61,19 @@ dt<-abs(ts)<t.critical
 
 mean(dt)*100
 
+
 ```
+
+Galima daryti išvadą, kad 
+
+```{r}
+floor(mean(dt)*100)
+```
+
+kartus iš 100 nulinė hipotezė bus neatmesta.
+
+
+
 ## Literatūra
 
 http://statistics.berkeley.edu/computing/r-t-tests
