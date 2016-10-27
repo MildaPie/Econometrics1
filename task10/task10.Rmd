@@ -13,8 +13,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Užduotis skirta išmokti tikrinti paprastą statistinę hipotezę ir suprasti jos rezultatus.
 
-Tegul x1,...,X100∼N(1,2)x1,...,X100∼N(1,2). Susigeneruokite tokią imtį ir patikrinkite nulinę hipotezę, kad H0:μ=1H0:μ=1, su alternatyva, kad μ≠1μ≠1. Tam rekalinga funkcija t.test. Detaliai paaiškinkite ką reiškia funkcijos išvestyje pateikti skaičiai.
-Reikšmingumo lygmuo 0,05.
+Tegul x1,...,X100∼N(1,2)x1,...,X100∼N(1,2). Susigeneruokite tokią imtį ir patikrinkite nulinę hipotezę, kad H0:μ=1, su alternatyva, kad μ≠1. Tam rekalinga funkcija t.test. Detaliai paaiškinkite ką reiškia funkcijos išvestyje pateikti skaičiai.
+Reikšmingumo lygmuo $\alpha=0,05$.
 
 ```{r }
 X<-rnorm(100, 1, sqrt(2))
@@ -39,6 +39,17 @@ Detaliai paaiškinkite ką reiškia t.test funkcijos išvestyje pateikti skaiči
 t.test(X,mu=1)
 
 ```
+n- imties dydis, a H0 vidurkis, s- imties standartinis nuokrypis.
+
+t -Stjudento kriterijaus statistika. Apskaičiuojama $\frac{\bar{x}-a}{\sqrt{s^2/n}}$
+
+df- degrees of freedom- laisvės laipsniai. df=n-1
+
+p-value- p-reikšmė. Tikimybė, kad kriterijaus statistika (tuo atveju, kai H0 teisinga) ne mažesnė už stebimą realizaciją.
+
+95 percent confidence interval - 95 proc. pasikliautinasis intervalas. Tegul $\hat{\theta_1}$ ir $\hat{\theta_2}$ dvi tokios statistikos, kad $Ρ(\hat{\theta_1} < θ < \hat{\theta_2}) = Q$. Tada intervalas $[\hat{\theta_1},\hat{\theta_2}]$ vadinamas parametro θ pasikliautinuoju intervalu. Skaičius Q vadinamas pasikliovimo lygmeniu $(Q=1-\alpha)$. 
+
+mean of x - imties vidurkis.
 
 
 Kartokite a) dalies generavima daug kartų (pvz.10^4) ir suskaičiuokite kiek atvejų buvo atmesta nulinė hipotezė? Išreiškite šį skaičių procentais. Kokią išvadą galite padaryti?
