@@ -206,13 +206,13 @@ partialdata&lt;-cbind(userdata, lessondata, qdata, correctdata, attemptdata)
  f&lt;-duplicated(partialdata)
  mean(f) ## nera dubliu</code></pre>
 <pre><code>## [1] 0</code></pre>
-<pre class="r"><code> sk&lt;-df</code></pre>
+<pre class="r"><code> sk&lt;-df # kopijuojam sutvarkytus duomenis, kad būtų galima naudoti kitoje užduotyje</code></pre>
 </div>
 </div>
 <div id="praktinai-klausimai" class="section level2">
 <h2>Praktinai klausimai</h2>
 <p>Jums reikia atsakyti į svarbiausius praktinius klausimus:</p>
-<p>Kurie studentai yra pilnai atliko visas swirl užduotis, t.y. pilnai atliktos visos uÅ¾duotis nepraleidÅžiant jokių klausimų.</p>
+<p>Kurie studentai yra pilnai atliko visas swirl užduotis, t.y. pilnai atliktos visos užduotis nepraleidžiant jokių klausimų.</p>
 <p>Reikia identifikuoti ir tuos, kurie ne pilnai viską atliko. Kiekvienam skolininkui reikia identifikuoti kiek pamokos yra nepilnai atsiskaitytos ir kiek klausimų yra praleista.</p>
 <pre class="r"><code>table(df[df$skipped==TRUE,7])</code></pre>
 <pre><code>## 

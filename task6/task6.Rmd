@@ -60,13 +60,13 @@ attemptdata<-df$attempt
 partialdata<-cbind(userdata, lessondata, qdata, correctdata, attemptdata)
  f<-duplicated(partialdata)
  mean(f) ## nera dubliu
- sk<-df
+ sk<-df # kopijuojam sutvarkytus duomenis, kad bûtø galima naudoti kitoje uşduotyje
 ```
 
 ## Praktinai klausimai
 Jums reikia atsakyti á svarbiausius praktinius klausimus:
 
-Kurie studentai yra pilnai atliko visas swirl uşduotis, t.y. pilnai atliktos visos uÅ¾duotis nepraleidÅşiant jokiø klausimø.
+Kurie studentai yra pilnai atliko visas swirl uşduotis, t.y. pilnai atliktos visos uşduotis nepraleidşiant jokiø klausimø.
 
 Reikia identifikuoti ir tuos, kurie ne pilnai viskà atliko. Kiekvienam skolininkui reikia identifikuoti kiek pamokos yra nepilnai atsiskaitytos ir kiek klausimø yra praleista.
 

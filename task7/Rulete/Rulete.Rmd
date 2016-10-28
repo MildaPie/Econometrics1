@@ -34,7 +34,7 @@ Raskite apytikslæ $x$ reikðmæ, kuriai galioja nelygybe $P(balansas<x) = 0.25$.
  quantile(df, prob=0.25)
 ``` 
 
-```
+
 
 Literatûra:
 

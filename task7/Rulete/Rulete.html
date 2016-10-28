@@ -132,12 +132,11 @@ df&lt;-replicate(m, sum(sample(c(-1,1), n, prob = c(19/37, 18/37), replace = TRU
 dt&lt;-df&gt;0</code></pre>
 <p>Tikimybė, kad balansas bus teigiamas.</p>
 <pre class="r"><code> sum(dt)/m</code></pre>
-<pre><code>## [1] 0.1887</code></pre>
+<pre><code>## [1] 0.1926</code></pre>
 <p>Raskite apytikslę <span class="math inline">\(x\)</span> reikšmę, kuriai galioja nelygybe <span class="math inline">\(P(balansas&lt;x) = 0.25\)</span>.</p>
 <pre class="r"><code> quantile(df, prob=0.25)</code></pre>
 <pre><code>## 25% 
 ## -48</code></pre>
-<p>```</p>
 <p>Literatūra:</p>
 <p><a href="https://en.wikipedia.org/wiki/Roulette" class="uri">https://en.wikipedia.org/wiki/Roulette</a></p>
 </div>
