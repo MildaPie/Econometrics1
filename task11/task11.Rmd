@@ -1,0 +1,58 @@
+---
+title: "task11"
+author: "MildaPie"
+date: '2016 m spalis 28 d '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Tiesinė regresija
+
+Pakete datasets yra duomenų masyvas longley. Iš šio kintamųjų padarykite tiesinę regresiją, kur prognozuojamas kintamasis būtų GNP, o regresosius Employed. Jums reikia:
+
+Įvertinti paprastosios tiesinės regresijos modelį. Pateikti modelio summary ir pakomentuoti ką reiškia gauti skaičiai. Kaip interpretuoti gautus rezultatus?
+
+Padarykite modelio prognozes taškuose $62, 65, 68$.
+
+Išbrėžkite kintamųjų sklaidos diagramą kartu su tiesinės regresijos tiese ir naujomis prognozėmis. Grafiką pateikite su pilna legenda, kurioje būtų nurodyti visi žymėjimai.
+
+#### Modelio Įvertinimas
+ 
+```{r longley}
+names(longley)
+
+longley.lm <- lm(GNP ~ Employed, data = longley)
+ 
+ summary(lm(GNP~Employed, longley))
+ 
+ 
+```
+
+#### Prognozės
+
+```{r}
+longley.lm <- lm(GNP ~ Employed, data = longley)
+predict(longley.lm,newdata=data.frame(Employed=c(62,65,68)))
+```
+
+#### Sklaidos diagrama
+
+```{r }
+longley.lm <- lm(GNP ~ Employed, data = longley)
+ plot(GNP ~ Employed, data = longley, pch=16, main="Sklaidos diagrama", xlab="Employed", ylab = "GNP")
+ abline(coef(longley.lm))
+ predict(longley.lm,newdata=data.frame(Employed=c(62,65,68)))->pre
+ 
+ points(c(62,65,68), pre, col=2)
+ legend("bottomright", legend = c("Regression line","prognozes", "duomenys" ), col = c(1,2,1), lty = c(1,NA,NA), pch=c(NA, 1, 16) )
+ 
+```
+
+# Literatūra
+
+"Introduction to Probability and Statistics Using R", G. Jay Kerns
+https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf
+
