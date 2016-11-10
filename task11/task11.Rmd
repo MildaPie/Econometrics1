@@ -12,14 +12,14 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Tiesinė regresija
 
 Pakete datasets yra duomenų masyvas longley. Iš šio kintamųjų padarykite tiesinę regresiją, kur prognozuojamas kintamasis būtų GNP, o regresosius Employed. Jums reikia:
-
 Įvertinti paprastosios tiesinės regresijos modelį. Pateikti modelio summary ir pakomentuoti ką reiškia gauti skaičiai. Kaip interpretuoti gautus rezultatus?
-
-Padarykite modelio prognozes taškuose $62, 65, 68$.
-
+Padarykite modelio prognozes taškuose 
+62,65,68
+62,65,68
+.
 Išbrėžkite kintamųjų sklaidos diagramą kartu su tiesinės regresijos tiese ir naujomis prognozėmis. Grafiką pateikite su pilna legenda, kurioje būtų nurodyti visi žymėjimai.
 
-#### Modelio Įvertinimas
+#### Modelio įvertinimas
  
 ```{r longley}
 names(longley)
@@ -30,6 +30,12 @@ longley.lm <- lm(GNP ~ Employed, data = longley)
  
  
 ```
+
+Residuals - nusako skirtumą tarp kintamojo tikrųjų reikšmių ir ir regresijos nustatytų. Daugeliu atvejų reikia, kad residuals primintų normalūjų skirstinį.
+Signif codes - žvaigždutės atitinka p reikšmę. *** reiškia, kad nedidelė tikimybė, jog nėra priklausomybės tarp y ir x.
+Estimated coefficient- regresija įvertintas krypties koeficientas.
+Standard error - matuoja koeficiento įverčio variaciją. Kuo mažesnis, tuo geriau. (Turėtų būti mažesnis, nei coefficient estimate)
+residual standard error- residuals standartinis nuokrypis. Turėtų būti proporcingas kvantiliams prie Residuals. Multiple R-squared- matuoja goodness of fit. Kuo didesnis tuo geriau (iki 1). F-statistic- F testo rezultatas. Tikrina, ar modelis su daugiau parametrų (dabartinis) geresnis, nei su mažiau.
 
 #### Prognozės
 
@@ -54,5 +60,8 @@ longley.lm <- lm(GNP ~ Employed, data = longley)
 # Literatūra
 
 "Introduction to Probability and Statistics Using R", G. Jay Kerns
+
 https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf
+
+http://blog.yhat.com/posts/r-lm-summary.html
 
