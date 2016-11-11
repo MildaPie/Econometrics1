@@ -33,7 +33,7 @@ quantile(balansas, probs = c(0.025, 0.975))
 ```
 Kaip atrodo balanso tankis?
 ```{r }
-plot(density(balansas), main="Balanso tankis")
+plot(density(balansas), main="Balanso tankis", xlab="Reiksmes", ylab="Tankis",lwd="3",col="2")
 ```
 
 Literatura

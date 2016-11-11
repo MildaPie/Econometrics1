@@ -57,20 +57,15 @@ Kartokite a) dalies generavima daug kartų (pvz.10^4) ir suskaičiuokite kiek at
 ```{r }
 n=10^4
 ts = replicate(n,t.test(rnorm(100, 1,2), mu=1)$statistic)
-dt<-abs(ts)<t.critical
+dt<-abs(ts)>t.critical
 
 mean(dt)*100
 
 
 ```
 
-Galima daryti išvadą, kad 
+Galima daryti išvadą, kad nulinė hipotezė bus atmesta tiek kartų iš 100, koks pasirinktas reikšmingumo lygmuo.
 
-```{r}
-floor(mean(dt)*100)
-```
-
-kartus iš 100 nulinė hipotezė bus neatmesta.
 
 
 

@@ -124,12 +124,9 @@ $(document).ready(function () {
 
 <div id="tiesine-regresija" class="section level2">
 <h2>Tiesinė regresija</h2>
-<p>Pakete datasets yra duomenų masyvas longley. Iš šio kintamųjų padarykite tiesinę regresiją, kur prognozuojamas kintamasis būtų GNP, o regresosius Employed. Jums reikia:</p>
-<p>Įvertinti paprastosios tiesinės regresijos modelį. Pateikti modelio summary ir pakomentuoti ką reiškia gauti skaičiai. Kaip interpretuoti gautus rezultatus?</p>
-<p>Padarykite modelio prognozes taškuose <span class="math inline">\(62, 65, 68\)</span>.</p>
-<p>Išbrėžkite kintamųjų sklaidos diagramą kartu su tiesinės regresijos tiese ir naujomis prognozėmis. Grafiką pateikite su pilna legenda, kurioje būtų nurodyti visi žymėjimai.</p>
+<p>Pakete datasets yra duomenų masyvas longley. Iš šio kintamųjų padarykite tiesinę regresiją, kur prognozuojamas kintamasis būtų GNP, o regresosius Employed. Jums reikia: Įvertinti paprastosios tiesinės regresijos modelį. Pateikti modelio summary ir pakomentuoti ką reiškia gauti skaičiai. Kaip interpretuoti gautus rezultatus? Padarykite modelio prognozes taškuose 62,65,68 62,65,68 . Išbrėžkite kintamųjų sklaidos diagramą kartu su tiesinės regresijos tiese ir naujomis prognozėmis. Grafiką pateikite su pilna legenda, kurioje būtų nurodyti visi žymėjimai.</p>
 <div id="modelio-ivertinimas" class="section level4">
-<h4>Modelio Įvertinimas</h4>
+<h4>Modelio įvertinimas</h4>
 <pre class="r"><code>names(longley)</code></pre>
 <pre><code>## [1] &quot;GNP.deflator&quot; &quot;GNP&quot;          &quot;Unemployed&quot;   &quot;Armed.Forces&quot;
 ## [5] &quot;Population&quot;   &quot;Year&quot;         &quot;Employed&quot;</code></pre>
@@ -154,6 +151,7 @@ $(document).ready(function () {
 ## Residual standard error: 18.58 on 14 degrees of freedom
 ## Multiple R-squared:  0.9674, Adjusted R-squared:  0.965 
 ## F-statistic: 415.1 on 1 and 14 DF,  p-value: 8.363e-12</code></pre>
+<p>Residuals - nusako skirtumą tarp kintamojo tikrųjų reikšmių ir ir regresijos nustatytų. Daugeliu atvejų reikia, kad residuals primintų normalūjų skirstinį. Signif codes - žvaigždutės atitinka p reikšmę. *** reiškia, kad nedidelė tikimybė, jog nėra priklausomybės tarp y ir x. Estimated coefficient- regresija įvertintas krypties koeficientas. Standard error - matuoja koeficiento įverčio variaciją. Kuo mažesnis, tuo geriau. (Turėtų būti mažesnis, nei coefficient estimate) residual standard error- residuals standartinis nuokrypis. Turėtų būti proporcingas kvantiliams prie Residuals. Multiple R-squared- matuoja goodness of fit. Kuo didesnis tuo geriau (iki 1). F-statistic- F testo rezultatas. Tikrina, ar modelis su daugiau parametrų (dabartinis) geresnis, nei su mažiau.</p>
 </div>
 <div id="prognozes" class="section level4">
 <h4>Prognozės</h4>
@@ -176,7 +174,9 @@ predict(longley.lm,newdata=data.frame(Employed=c(62,65,68)))</code></pre>
 </div>
 <div id="literatura" class="section level1">
 <h1>Literatūra</h1>
-<p>“Introduction to Probability and Statistics Using R”, G. Jay Kerns <a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf" class="uri">https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf</a></p>
+<p>“Introduction to Probability and Statistics Using R”, G. Jay Kerns</p>
+<p><a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf" class="uri">https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf</a></p>
+<p><a href="http://blog.yhat.com/posts/r-lm-summary.html" class="uri">http://blog.yhat.com/posts/r-lm-summary.html</a></p>
 </div>
 
 
