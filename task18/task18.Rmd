@@ -1,0 +1,87 @@
+---
+title: "task18"
+author: "Milda Pieškutė"
+date: '2016 m lapkritis 18 d '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Užduotis
+
+Jums reikia atlikti paprastą tiesinę regresiją. Prognozuojamas kintamasis y, regresosrius x. Duomenų failas:
+
+https://github.com/1vbutkus/Econometrics1/blob/master/task15/data.csv
+
+#### 1-a dalis
+
+Įvertinti tiesinės regresijos modelį.
+$$ y_{t} = \beta_{0} + \beta_{1}x_{t} + \beta_{2}x^2_{t}+\epsilon_{t} $$
+
+
+Pateikti modelio `summary` ir pakomentuoti ką reiškia gauti skaičiai. Kaip interpretuoti gautus rezultatus?
+
+```{r }
+dt<-read.csv("U:/Desktop/Econometrics1/task18/data.csv", header = TRUE)
+
+x<-dt$x
+y<-dt$y
+
+quadratic.model<-lm(y~x+I(x^2))
+summary(quadratic.model)
+
+```
+
+`Residuals` - nusako skirtumą tarp kintamojo tikrųjų reikšmių ir ir regresijos nustatytų. Daugeliu atvejų reikia, kad residuals primintų normalųjų skirstinį.
+
+`Pr(>|t|)`-Kintamųjų p-reikšmės- nurodo tikimybę,kad kintamasis nėra reikšmingas. Turi būti kuo mažesnė ir mažesnė už pasirinktą reikšmingumo lygmenį.
+
+`Estimate`-Estimated coefficient- regresija įvertintos $\beta$ reikšmės.
+
+`Std. Error`-Standard error - matuoja koeficiento įverčio standartinį nuokrypį. Kuo mažesnis, tuo geriau. (Turėtų būti dukart mažesnis, nei coefficient estimate)
+
+`Signif. codes` - žvaigždutės atitinka p reikšmę. *** reiškia, kad nedidelė tikimybė, jog nėra priklausomybės tarp y ir x.
+
+`Residual standard error`- residuals standartinis nuokrypis. Turėtų būti proporcingas kvantiliams prie Residuals. 
+
+`Multiple R-squared`- matuoja goodness of fit. Kuo didesnis tuo geriau (iki 1). 
+
+`F-statistic`- F testo rezultatas. Tikrina, ar modelis su daugiau parametrų (dabartinis) geresnis, nei su mažiau.
+
+
+#### 2-a dalis
+
+Padarykite modelio prognozes taškuose (0, 0.3, 0.5).
+
+```{r }
+predict(quadratic.model,newdata=data.frame(x=c(0,0.3,0.5)))->pre
+pre
+```
+
+#### 3-a dalis
+
+Išbrėžkite kintamųjų sklaidos diagramą kartu su tiesinės regresijos tiese ir naujomis prognozėmis. Grafiką pateikite su pilna legenda, kurioje būtų nurodyti visi žymėjimai.
+
+```{r }
+xvalues<-seq(-0.5,2,0.1)
+predictedcounts<-predict(quadratic.model, list(x=xvalues, x2=xvalues^2))
+plot(x, y, pch=16, xlab="x", ylab="y",main="Sklaidos diagrama")
+lines(xvalues, predictedcounts, col=2, lwd=1)
+points(c(0,0.3,0.5), pre, col=3, pch=19)
+legend("topleft", legend = c("Regression line","prognozes", "duomenys" ), col = c(2,3,1), lty = c(1,NA,NA), pch=c(NA, 19, 16) )
+
+```
+
+#### 4-a dalis
+
+Pakomentuokite ar tinkamas šis modelis duotiems duomenims. Ar galite pateikti tobulinimo pasiūlymų?
+
+Aš manau, kad taip. Patobulinimui pasiūlymų neturiu.
+
+## Šaltiniai
+
+http://blog.yhat.com/posts/r-lm-summary.html
+
+http://www.theanalysisfactor.com/r-tutorial-4/
