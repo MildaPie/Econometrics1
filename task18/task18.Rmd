@@ -1,0 +1,77 @@
+---
+title: "task18"
+author: "Milda Pieškutė"
+date: '2016 m lapkritis 18 d '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Užduotis
+
+Jums reikia atlikti paprastą tiesinę regresiją. Prognozuojamas kintamasis y, regresosrius x. Duomenų failas:
+
+https://github.com/1vbutkus/Econometrics1/blob/master/task15/data.csv
+
+#### 1-a dalis
+
+Įvertinti tiesinės regresijos modelį.
+$$ y_{t} = \beta_{0} + \beta_{1}x_{t} + \beta_{2}x^2_{t}+\epsilon_{t} $$
+
+
+Pateikti modelio `summary` ir pakomentuoti ką reiškia gauti skaičiai. Kaip interpretuoti gautus rezultatus?
+
+```{r }
+dt<-read.csv("https://raw.githubusercontent.com/1vbutkus/Econometrics1/master/task15/data.csv", header = TRUE)
+
+x<-dt$x
+y<-dt$y
+
+
+quadratic.model<-lm(y~x+I(x^2))
+summary(quadratic.model)
+
+```
+Residuals - nusako skirtumą tarp kintamojo tikrųjų reikšmių ir ir regresijos nustatytų. Daugeliu atvejų reikia, kad residuals primintų normalūjų skirstinį.
+
+
+Signif codes - žvaigždutės atitinka p reikšmę. *** reiškia, kad nedidelė tikimybė, jog nėra priklausomybės tarp y ir x.
+
+Estimated coefficient- regresija įvertintas krypties koeficientas ir .
+
+Standard error - matuoja koeficiento įverčio standartinį nuokrypį. Kuo mažesnis, tuo geriau. (Turėtų būti dukart mažesnis, nei coefficient estimate)
+
+residual standard error- residuals standartinis nuokrypis. Turėtų būti proporcingas kvantiliams prie Residuals. 
+
+Multiple R-squared- matuoja goodness of fit. Kuo didesnis tuo geriau (iki 1). 
+
+F-statistic- F testo rezultatas. Tikrina, ar modelis su daugiau parametrų (dabartinis) geresnis, nei su mažiau.
+
+
+#### 2-a dalis
+
+Padarykite modelio prognozes taškuose (0, 0.3, 0.5).
+
+```{r }
+
+```
+
+#### 3-a dalis
+
+Išbrėžkite kintamųjų sklaidos diagramą kartu su tiesinės regresijos tiese ir naujomis prognozėmis. Grafiką pateikite su pilna legena, kurioje būtų nurodyti visi žymėjimai.
+
+```{r }
+
+```
+#### 4-a dalis
+
+Pakomentuokite ar tinkamas šis modelis duotiems duomenims. Ar galite pateikti tobulinimo pasiūlymų?
+
+```{r }
+
+```
+
+## Šaltiniai
+
