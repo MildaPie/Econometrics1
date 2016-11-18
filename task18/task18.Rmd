@@ -24,7 +24,7 @@ $$ y_{t} = \beta_{0} + \beta_{1}x_{t} + \beta_{2}x^2_{t}+\epsilon_{t} $$
 Pateikti modelio `summary` ir pakomentuoti ką reiškia gauti skaičiai. Kaip interpretuoti gautus rezultatus?
 
 ```{r }
-dt<-read.csv("U:/Desktop/Econometrics1/task18/data.csv", header = TRUE)
+dt<-read.csv("https://raw.githubusercontent.com/1vbutkus/Econometrics1/master/task15/data.csv", header = TRUE)
 
 x<-dt$x
 y<-dt$y
