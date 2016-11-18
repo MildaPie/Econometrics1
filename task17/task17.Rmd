@@ -1,0 +1,86 @@
+---
+title: "task17"
+author: "MildaPie"
+date: '2016 m lapkritis 13 d '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Užduotis
+
+
+Faile train.csv yra pradiniai duomenys skirti tyrimui, o faile input.csv yra duomenys skirti prognozavimui. Jums reikia suprognozuoti input.csv faile trūkstamas y reikšmes, remiantis train.csv faile esančia informacija. Būtinai pateikite prognozių grafikus.
+
+## Sprendimas
+
+Nuskaitome duomenis.
+
+```{r }
+dtrain<-read.csv("https://raw.githubusercontent.com/1vbutkus/Econometrics1/master/task16/train.csv", header=TRUE)
+dinput<-read.csv("https://raw.githubusercontent.com/1vbutkus/Econometrics1/master/task16/input.csv", header=TRUE)
+
+plot(dtrain$x, dtrain$y) # pasižiūrime, kaip atrodo grafikas
+
+```
+
+
+Randame, kurių veiksnių priklausomybė su x panaši į tiesinę, nes iš grafiko atrodo, kad yra veiksys, dėl kurio vienu atveju prioporcingumas tarp x ir y atvirkštis, o kitu tiesioginis.
+```{r }
+plot(dtrain$x[dtrain$color==1], dtrain$y[dtrain$color==1])
+plot(dtrain$x[dtrain$color==2], dtrain$y[dtrain$color==2])
+
+```
+
+Tai yra spalva. Ieškome regresijos funkcijos nuo pirmos spalvos.
+```{r }
+y1<-dtrain$y[dtrain$color==1]
+x1<-dtrain$x[dtrain$color==1]
+lm(y1~x1)
+
+coef1<-coefficients(lm(y1~x1)) #išsaugojame koeficientus
+```
+Ieškome regresijos funkcijos nuo antros spalvos.
+```{r }
+y2<-dtrain$y[dtrain$color==2]
+x2<-dtrain$x[dtrain$color==2]
+lm(y2~x2)
+
+coef2<-coefficients(lm(y2~x2)) #išsaugojame koeficientus
+```
+
+#### Prognozė
+
+Papildome input failo duomenis.
+
+```{r }
+inputy<-rep(0, times=length(dinput$x))
+
+trainy1<-function(x){coef1[1]+coef1[2]*x} # pagal tiesinės regresijos lygtį
+
+trainy2<-function(x){coef2[1]+coef2[2]*x}
+
+for(i in 1:length(dinput$x)){
+  
+  if(dtrain$color[i]==1){
+    inputy[i]=trainy1(dinput$x[i])
+  }
+  
+    else{
+       inputy[i]=trainy2(dinput$x[i])
+       }
+}
+```
+
+Nubraižome input duomenų grafiką. 
+
+```{r }
+
+plot(dinput$x, inputy)
+```
+
+## Šaltiniai
+
+Darėm su Raigardu Balužiu.
