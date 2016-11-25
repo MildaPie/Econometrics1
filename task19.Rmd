@@ -1,0 +1,71 @@
+---
+title: "task19"
+author: "Milda Pieškutė"
+date: '2016 m lapkritis 25 d '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Užduotis
+
+Jums reikia atlikti tiesinę regresiją. Prognozuojamas kintamasis y, duomenų failas: input.csv
+
+```{r }
+
+dt<-read.csv("C:/Users/mipi2749/Downloads/train.csv", header = TRUE)
+
+names(dt)
+
+class(dt$status)
+
+```
+
+1. Įvertinti tiesinės regresijos modelį:
+
+$\y_t=\beta_{UAB}mathbbm{1}_{status=UAB}+\beta_{II}mathbbm{1}_{status=II}+\betax_{t}+ε_{t}\$
+
+Vertinimui sukurkite ir naudokite fiktyvus kintamuosius
+
+```{r }
+x<-dt$x
+y<-dt$y
+s<-dt$status
+duab<-(dt$status=="UAB")*1
+dii<-(dt$status=="II")*1
+lm<-lm(y~x+duab+dii)
+summary(lm)
+```
+
+2. Įvertinkite tą patį tiesinės regresijos modelį, bet dabar tiesiogiai panaudokite `status` kintamąjį kaip `faktor` tipo regresorių. 
+
+```{r }
+lm<-lm(y~factor(dt$status))
+summary(lm)
+```
+
+3. Palyginkite dviejų vertinimų rezultatus:
+
+Palyginkite modelių charakteristikas: R-kvadratą, F statistiką ir paklaidų dispersiją.
+Palyginkite modelių prognozes.
+Ar abiejų modelių įverčiai sutampa? Jeigu nesutampa, tai paaiškinkite kodėl atsiranda skirtumai ir kaip siejasi abiejų modelių įverčiai, 
+
+```{r }
+
+
+```
+
+4. Duomenų faile `test.csv` yra analogiška duomenų porcija. Remiantis duomenimis, jums reikia padaryti Y prognozę ir palyginti su faktinėmis Y reikšmėmis (prognozėms pasirinkite betkurį modelį). Palyginimui suskaičiuokite paklaidų standartinį nuokrypį ir palyginkite jį su modelio vertinimo metu gautu įverčiu.
+
+```{r }
+
+
+
+```
+
+## Šaltiniai
+
+http://statistics.ats.ucla.edu/stat/r/modules/dummy_vars.htm
+http://ewens.caltech.edu/2011/11/12/indicator-function-in-latex/
