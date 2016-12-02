@@ -138,61 +138,109 @@ names(dt)</code></pre>
 <p>Vertinimui sukurkite ir naudokite fiktyvus kintamuosius</p>
 <pre class="r"><code>x&lt;-dt$x
 y&lt;-dt$y
-s&lt;-dt$status
+status&lt;-dt$status
 duab&lt;-(dt$status==&quot;UAB&quot;)*1
 dii&lt;-(dt$status==&quot;II&quot;)*1
-lm&lt;-lm(y~x+duab+dii)
-summary(lm)</code></pre>
+lm1&lt;-lm(y~x+duab+dii-1)
+summary(lm1)</code></pre>
 <pre><code>## 
 ## Call:
-## lm(formula = y ~ x + duab + dii)
+## lm(formula = y ~ x + duab + dii - 1)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
 ## -1.43769 -0.49804 -0.05061  0.45632  1.90501 
 ## 
-## Coefficients: (1 not defined because of singularities)
-##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  3.986852   0.022264  179.07   &lt;2e-16 ***
-## x            1.770577   0.006166  287.15   &lt;2e-16 ***
-## duab        -1.526283   0.030906  -49.38   &lt;2e-16 ***
-## dii                NA         NA      NA       NA    
+## Coefficients:
+##      Estimate Std. Error t value Pr(&gt;|t|)    
+## x    1.770577   0.006166   287.1   &lt;2e-16 ***
+## duab 2.460568   0.021496   114.5   &lt;2e-16 ***
+## dii  3.986852   0.022264   179.1   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.6797 on 1997 degrees of freedom
+## Multiple R-squared:  0.9881, Adjusted R-squared:  0.9881 
+## F-statistic: 5.513e+04 on 3 and 1997 DF,  p-value: &lt; 2.2e-16</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Įvertinkite tą patį tiesinės regresijos modelį, bet dabar tiesiogiai panaudokite <code>status</code> kintamąjį kaip <code>factor</code> tipo regresorių.</li>
+</ol>
+<pre class="r"><code>lm2&lt;-lm(y~x+factor(status))
+summary(lm2)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ x + factor(status))
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.43769 -0.49804 -0.05061  0.45632  1.90501 
+## 
+## Coefficients:
+##                    Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)        3.986852   0.022264  179.07   &lt;2e-16 ***
+## x                  1.770577   0.006166  287.15   &lt;2e-16 ***
+## factor(status)UAB -1.526283   0.030906  -49.38   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 0.6797 on 1997 degrees of freedom
 ## Multiple R-squared:  0.979,  Adjusted R-squared:  0.979 
 ## F-statistic: 4.653e+04 on 2 and 1997 DF,  p-value: &lt; 2.2e-16</code></pre>
-<ol start="2" style="list-style-type: decimal">
-<li>Įvertinkite tą patį tiesinės regresijos modelį, bet dabar tiesiogiai panaudokite <code>status</code> kintamąjį kaip <code>faktor</code> tipo regresorių.</li>
-</ol>
-<pre class="r"><code>lm&lt;-lm(y~factor(dt$status))
-summary(lm)</code></pre>
-<pre><code>## 
-## Call:
-## lm(formula = y ~ factor(dt$status))
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -15.4036  -2.9189   0.0765   2.9504  15.2717 
-## 
-## Coefficients:
-##                      Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)            5.6531     0.1397   40.45   &lt;2e-16 ***
-## factor(dt$status)UAB  -3.1300     0.1976  -15.84   &lt;2e-16 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 4.419 on 1998 degrees of freedom
-## Multiple R-squared:  0.1115, Adjusted R-squared:  0.1111 
-## F-statistic: 250.8 on 1 and 1998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>Palyginkite dviejų vertinimų rezultatus:</li>
 </ol>
-<p>Palyginkite modelių charakteristikas: R-kvadratą, F statistiką ir paklaidų dispersiją. Palyginkite modelių prognozes. Ar abiejų modelių įverčiai sutampa? Jeigu nesutampa, tai paaiškinkite kodėl atsiranda skirtumai ir kaip siejasi abiejų modelių įverčiai,</p>
+<p>Palyginkite modelių charakteristikas: R-kvadratą, F statistiką ir paklaidų dispersiją.</p>
+<pre class="r"><code>summary(lm1)$r.squared #R-kvadratas</code></pre>
+<pre><code>## [1] 0.9880706</code></pre>
+<pre class="r"><code>summary(lm2)$r.squared</code></pre>
+<pre><code>## [1] 0.978991</code></pre>
+<pre class="r"><code>summary(lm1)$fstatistic #F statistika</code></pre>
+<pre><code>##    value    numdf    dendf 
+## 55134.67     3.00  1997.00</code></pre>
+<pre class="r"><code>summary(lm2)$fstatistic</code></pre>
+<pre><code>##    value    numdf    dendf 
+## 46528.74     2.00  1997.00</code></pre>
+<pre class="r"><code>summary(lm1)$sigma #paklaidų dispersija</code></pre>
+<pre><code>## [1] 0.6797138</code></pre>
+<pre class="r"><code>summary(lm2)$sigma</code></pre>
+<pre><code>## [1] 0.6797138</code></pre>
+<p>Paklaidų dispersija nesiskiria.</p>
+<p>Palyginkite modelių prognozes.</p>
+<pre class="r"><code>pre1&lt;-predict(lm1,dt )
+pre2&lt;-predict(lm2,dt )
+
+max(abs(pre1-pre2))</code></pre>
+<pre><code>## [1] 2.131628e-14</code></pre>
+<p>Prognozės nesiskiria.</p>
+<p>Ar abiejų modelių įverčiai sutampa? Jeigu nesutampa, tai paaiškinkite kodėl atsiranda skirtumai ir kaip siejasi abiejų modelių įverčiai.</p>
+<pre class="r"><code>summary(lm1)$coef</code></pre>
+<pre><code>##      Estimate  Std. Error  t value Pr(&gt;|t|)
+## x    1.770577 0.006166027 287.1504        0
+## duab 2.460568 0.021495542 114.4688        0
+## dii  3.986852 0.022263889 179.0726        0</code></pre>
+<pre class="r"><code>summary(lm2)$coef</code></pre>
+<pre><code>##                    Estimate  Std. Error  t value Pr(&gt;|t|)
+## (Intercept)        3.986852 0.022263889 179.0726        0
+## x                  1.770577 0.006166027 287.1504        0
+## factor(status)UAB -1.526283 0.030906497 -49.3839        0</code></pre>
+<p>Modelių įverčiai nesutampa.</p>
 <ol start="4" style="list-style-type: decimal">
 <li>Duomenų faile <code>test.csv</code> yra analogiška duomenų porcija. Remiantis duomenimis, jums reikia padaryti Y prognozę ir palyginti su faktinėmis Y reikšmėmis (prognozėms pasirinkite betkurį modelį). Palyginimui suskaičiuokite paklaidų standartinį nuokrypį ir palyginkite jį su modelio vertinimo metu gautu įverčiu.</li>
 </ol>
+<pre class="r"><code>test&lt;-read.csv(&quot;C:/Users/mipi2749/Downloads/test.csv&quot;, header = TRUE)
+
+pre&lt;-predict(lm1,test )
+head(pre)</code></pre>
+<pre><code>##         1         2         3         4         5         6 
+## -3.629957 -2.876448  4.157909  3.807948  1.206490 -2.684759</code></pre>
+<pre class="r"><code>######### Ne taip!!!!!
+x&lt;-test$x
+y&lt;-test$y
+status&lt;-test$status
+duab&lt;-(test$status==&quot;UAB&quot;)*1
+dii&lt;-(test$status==&quot;II&quot;)*1
+lm3&lt;-lm(y~x+duab+dii-1)
+pre2&lt;-predict(lm3, test)</code></pre>
 </div>
 <div id="saltiniai" class="section level2">
 <h2>Šaltiniai</h2>

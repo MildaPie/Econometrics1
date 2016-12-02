@@ -32,37 +32,79 @@ Vertinimui sukurkite ir naudokite fiktyvus kintamuosius
 ```{r }
 x<-dt$x
 y<-dt$y
-s<-dt$status
+status<-dt$status
 duab<-(dt$status=="UAB")*1
 dii<-(dt$status=="II")*1
-lm<-lm(y~x+duab+dii)
-summary(lm)
+lm1<-lm(y~x+duab+dii-1)
+summary(lm1)
 ```
 
-2. Įvertinkite tą patį tiesinės regresijos modelį, bet dabar tiesiogiai panaudokite `status` kintamąjį kaip `faktor` tipo regresorių. 
+2. Įvertinkite tą patį tiesinės regresijos modelį, bet dabar tiesiogiai panaudokite `status` kintamąjį kaip `factor` tipo regresorių. 
 
 ```{r }
-lm<-lm(y~factor(dt$status))
-summary(lm)
+lm2<-lm(y~x+factor(status))
+summary(lm2)
 ```
 
 3. Palyginkite dviejų vertinimų rezultatus:
 
 Palyginkite modelių charakteristikas: R-kvadratą, F statistiką ir paklaidų dispersiją.
-Palyginkite modelių prognozes.
-Ar abiejų modelių įverčiai sutampa? Jeigu nesutampa, tai paaiškinkite kodėl atsiranda skirtumai ir kaip siejasi abiejų modelių įverčiai, 
 
 ```{r }
+summary(lm1)$r.squared #R-kvadratas
+summary(lm2)$r.squared
+```
 
+```{r }
+summary(lm1)$fstatistic #F statistika
+summary(lm2)$fstatistic
+```
+
+```{r }
+summary(lm1)$sigma #paklaidų dispersija
+summary(lm2)$sigma
 
 ```
+
+Paklaidų dispersija nesiskiria.
+
+Palyginkite modelių prognozes.
+```{r }
+pre1<-predict(lm1,dt )
+pre2<-predict(lm2,dt )
+
+max(abs(pre1-pre2))
+
+```
+Prognozės nesiskiria.
+
+
+Ar abiejų modelių įverčiai sutampa? Jeigu nesutampa, tai paaiškinkite kodėl atsiranda skirtumai ir kaip siejasi abiejų modelių įverčiai.
+
+```{r }
+summary(lm1)$coef
+summary(lm2)$coef
+```
+Modelių įverčiai nesutampa. 
 
 4. Duomenų faile `test.csv` yra analogiška duomenų porcija. Remiantis duomenimis, jums reikia padaryti Y prognozę ir palyginti su faktinėmis Y reikšmėmis (prognozėms pasirinkite betkurį modelį). Palyginimui suskaičiuokite paklaidų standartinį nuokrypį ir palyginkite jį su modelio vertinimo metu gautu įverčiu.
 
 ```{r }
+test<-read.csv("C:/Users/mipi2749/Downloads/test.csv", header = TRUE)
+
+pre<-predict(lm1,test )
+head(pre)
 
 
 
+######### Ne taip!!!!!
+x<-test$x
+y<-test$y
+status<-test$status
+duab<-(test$status=="UAB")*1
+dii<-(test$status=="II")*1
+lm3<-lm(y~x+duab+dii-1)
+pre2<-predict(lm3, test)
 ```
 
 ## Šaltiniai
