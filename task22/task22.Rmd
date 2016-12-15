@@ -1,0 +1,61 @@
+---
+title: "task22"
+author: "Milda Pieškutė"
+date: '2016 m gruodis 15 d '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(MASS)
+```
+
+## Multikolinearumas
+
+1. Sugeneruokite atsitiktinių dydžių vektorius $\n=100 x_1, x_2$ ir $\varepsilon$ iš populiacijos su tokiomis charakteristikomis:
+ $var(x_1)=5, var(x_2)=5, cor(x_1, x_2)=0.9 , var(\varepsilon)=1$
+Tuomet sugeneruokite $y$ pagal tokią lygtį:
+$y = 1 + 2 x_1 + 3 x_2 + \varepsilon$
+
+```{r }
+n=100
+somevar<-1:100
+x_1<-rnorm(n, sd=sqrt(5))
+x_2<-rnorm(n, sd=sqrt(5))
+e<-rnorm(n, 1)
+y=1+2*x_1+3*x_2+e  
+
+mu <- rep(0,2)
+Sigma <- matrix(c(1, 0.9, 0.9, 1), 2, 2)
+ 
+rawvars <- mvrnorm(n=100, mu=mu, Sigma=Sigma, empirical = TRUE)
+ 
+cov(rawvars)
+x_1<-rawvars[,1]
+x_2<-rawvars[,2]
+```
+
+2. Įvertinkite tiesinę regresiją su `lm` funkciją ir išsaugokite įvertintus koeficientus.
+
+```{r }
+
+
+```
+
+3. Kartokite 1. ir 2. žingsnius 1000 karų. Tuomet, gaukite įverčių vidurkius ir standartinį nuokrypį. Taip pat išbrėžkite gautų koeficientų tankio grafikus.
+
+```{r }
+
+
+```
+
+4. Dar kartą atlikite 1. punktą. Tuomet įvertinę tiesinę regresiją pažiūrėkite modelio `summary`. Prie koeficientų įverčių yra įvertinta ir jų standartinė paklaida. Palyginkite ją su 3-čiame punkte gautais standartiniais nuokrypiais. Pakomentuokite gautus rezultatus.
+
+```{r }
+
+
+```
+
+## Literatūra
+
+http://stats.stackexchange.com/questions/83172/generate-two-variables-with-precise-pre-specified-correlation
