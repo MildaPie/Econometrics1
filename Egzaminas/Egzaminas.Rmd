@@ -1,0 +1,241 @@
+---
+title: "Egzaminas"
+author: "Milda Pieškutė"
+date: '2017 m sausis 20 d '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Užduotis 1
+
+Sugeneruokite x su pateiktu R kodu.
+
+set.seed(1234567890)
+x <- rnorm(5000)
+
+```{r }
+set.seed(1234567890)
+x <- rnorm(5000)
+```
+a) Suraskite x vidukio ir standartinio nuokrypio įverčius.
+```{r}
+mean(x)
+sd(x)
+
+```
+
+
+b) Raskite x išskirtis. Šioje užduotyje, išskirtimis laikome reikšmes, kurios nepakliūna į intervalą $$[\bar{X} - 3\hat{sd}]; \bar{X} + 3\hat{sd}].$$ Čia $\bar{X}$ ir $\hat{sd}$ atitinkamai žymi vidukio ir standartinio nuokrypio įverčius. Atsakymui pateikite ir reikšmes, ir atitinkamus reikšmių indeksus.
+
+```{r}
+
+a<-((mean(x)-3*sd(x))>x|(mean(x)+3*sd(x))<x)
+
+table(a)
+which(a,TRUE)
+reiksmes<-x[c(which(a,TRUE))]
+```
+
+c) Pašalinkite rastas išskirtis iš x vektorius ir nubrėžkite atnaujinto x histogramą.
+
+```{r }
+naujasx<-x[-c(which(a, TRUE))]
+hist(naujasx)
+```
+
+## Užduotis 2 (numatyta 20 taškų)
+
+Tarkime $X_1$ ir $X_2$ yra nepriklausomi, $X_1 \sim N(3, 2)$, $X_2 \sim N(-1, 3)$ ir $X = X_1 + X_2$.
+
+a) Raskite $X$ teorinį skirstinį. Išbrėžkite tankio grafiką. Pastaba: labai naudinga savybė, kad dviejų natūraliųjų dydžių suma taip pat yra natūralusis dydis.
+
+Iš teorijos žinome, kad dviejų normaliųjų atsitiktinių dydžių sumos skirstinys yra miu1+miu2, sugma1+sigma2
+```{r}
+miu=3+(-1)
+sigma=2+3
+Xteor<-rnorm(10^5,miu, sqrt(sigma))
+
+density(Xteor)->dteor
+
+s <- seq(-4,4,length=100)*sqrt(sigma) + miu
+hx <- dnorm(s,miu,sqrt(sigma))
+
+plot(s, hx, type="l",main="Normal Distribution")->m
+```
+
+b) Sugeneruokite $X$ imtį ($N=10000$) pagal pateiktą $X$ apibrėžimą.
+
+```{r }
+n=10000
+x1<-rnorm(n,3,sqrt(2))
+x2<-rnorm(n,-1,sqrt(3))
+X<-x1+x2
+```
+
+c) Palyginkite sugeneruotą $X$ empirinį skirstinį su teorinį skirstiniu.
+Palyginimui pateikite tankių grafikus ir skirstinių charakteristikas (vidurkį, medianą ir standartinį nuokrypį).
+
+```{r}
+density(X)->d
+plot(d)
+
+plot(range(d$x, dteor$x), range(d$y, dteor$y), type = "n", xlab = "x",ylab = "Density")
+lines(d, col = "red")
+lines(s, hx, col = "blue")
+```
+Mėlyna teorinio tankis, raudona- empirinio.
+
+```{r}
+
+summary(X)
+```
+Teorinio vidurkis 2, mediana 2, standartinis nuokrypis kvadratine saknis is 5.
+
+d) Raskite teorinę įvykio $|X| > 2$ tikimybę (konkreti neatsitikinė konstanta).
+
+```{r}
+pnorm(-2, mean =miu, sd=sqrt(sigma))+1-pnorm(2, mean =miu, sd=sqrt(sigma))
+```
+
+e) Įvertinkite įvykio $|X| > 2$ tikimybę naudojantis Monte-Carlo metodu.
+```{r}
+n=10000
+x1<-rnorm(n,3,sqrt(2))
+x2<-rnorm(n,-1,sqrt(3))
+X<-x1+x2
+a<-X<(-2)|X>2
+sum(a)/n
+```
+
+## Užduotis 3 (numatyta 30 taškų)
+Faile 'data_a.csv' yra pateikti duomenys reikalingi tiesinės regresijos tyrimui. Duomenų masyvo aprašymas pateiktas minėto failo pradžioje.
+
+Duomenų apžvalga ir paruošimas. Šioje dalyje jums reikia susipažinti su duomenimis ir paruošti duomenis tolimesnei analizei.
+
+a) Nuskaitykite duomenų masyvą. Jeigu įmanoma, nekoreguokite originalaus failo.
+```{r}
+datafull<-read.csv2("https://raw.githubusercontent.com/1vbutkus/Econometrics1/master/Egzaminas/data.csv", stringsAsFactors = FALSE, header = TRUE, comment.char = "%")
+head(datafull)
+dim(datafull)
+```
+
+
+b) Paruoškite duomenis naudojimui. Jūs turite užtikrinti, kad:
+
+Neliko įrašų su trūkstamomis reikšmėmis - jeigu šalinote įrašus, tai būtinai raportuokite kiek įrašų pašalinta ir kiek liko.
+
+Duomenų masyve nėra kažkokių klaidų (pvz. negalimos reikšmės, neteisingas duomenų tipas, t.t.). Patartina patikrinti visų duomenų tipus, nes kartais nuskaitymo procedūra suinterpretuoja duoenis ne taip kaip tikimasi.
+```{r}
+
+ind<-datafull$amzius%in%c("MISSING")
+datafull<-datafull[!ind,]
+head(datafull)
+ind<-datafull$kaina%in%c("MISSING")
+datafull<-datafull[!ind,]
+ind<-datafull$galia%in%c("MISSING")
+datafull<-datafull[!ind,]
+ind<-datafull$rida%in%c("MISSING")
+datafull<-datafull[!ind,]
+ind<-datafull$markesKodas%in%c("MISSING")
+datafull<-datafull[!ind,]
+sapply(datafull, class)
+datafull$kaina<-as.numeric(datafull$kaina)
+datafull$rida<-as.numeric(datafull$rida)
+datafull$galia<-as.numeric(datafull$galia)
+
+sapply(datafull, class)
+
+dim(datafull)
+352-347# kiek įrašų pašalinom
+```
+
+c) Pateikite trumpą kintamųjų apžvalgą. Naudokite tik tuos duomenis (ir kintamuosius), kuriuos planuojate taikyti tyrimui, t.y. jei reikėjo ką nors modifikuoti, tai senųjų reikšmių naudoti nebereikia. Šiai apžvalgai užtenka informacijos, kurią pateikia funkcijos plot, summary ir cor.
+```{r}
+datafull<-datafull[,c(1,2,4)]
+cor(datafull)
+plot(datafull)
+```
+
+d) Duomenų masyvą suskaidykite į du atskirus ir nesikertančius masyvus. Didesnį masyvą turi sudaryti apie 80 proc. turimų stebėjimų. Šį masyvą vadinsime trainSet. Mažesnį masyvą turi sudaryti likę įrašai. Šį masyvą vadinsime testSet. Duomenų suskaidymas turi būti atsitiktinis. Gali būti naudingos šios funkcijos:sample, setdiff, %in%.
+```{r}
+n <- length(datafull)
+
+ind <- sample(c(TRUE, FALSE), n, replace=TRUE, prob=c(0.8, 0.2))
+trainSet <- datafull[ind, ]
+testSet <- datafull[!ind, ]
+```
+
+
+Tiesinio modelio sudarymas. Modelio sudarymui naudokite trainSet masyvą.
+
+a) Įvertinkite tiesinį modelių, kuriame prognozuojamas kintamasis būtų kaina. Ji turi tiesiškai priklausyti nuo kitų kintamųjų.
+```{r}
+mod1<-lm(kaina~rida+galia, trainSet)
+summary(mod1)
+```
+
+b) Ar visi įtraukti kintamieji daro reikšmingą įtaką prognozei? Jei ne, koreguokite modelį, kad visi kintamieji darytų reikšmingą įtaką. Šį įvertintą modelį žymėsime fit. Užrašykite šio modelio matematinę lygtį.
+
+Pagal paskutinį stulpelį matome, kad visi kintamieji daro reikšmingą įtaką.
+```{r}
+fit<-mod1
+```
+kaina=2.692e+04+rida*(-1.644e-02)+(-9.530e+01)*galia+epsilon
+c) Patikrinkite ar modelio paklaidas galime laikyti normaliomis.
+```{r}
+shapiro.test(fit$res)
+```
+Pagal shapiro.test p-value<0.05 atmetamame H0: liekanų paklaidos nera normalios.
+Modelių palyginimas ir prognozė.
+
+a) Suskaičiuokite modelio fit1 RMSE (Root Mean Squere Error), kuris apibrėžiamas taip $$ RMSE = \sqrt{\frac{1}{n} \sum_{i=1}^n \varepsilon_t^2}.$$
+```{r}
+rmse <- function(error)
+{
+    sqrt(mean(error^2))
+}
+
+
+rmse(fit$residuals)
+```
+
+
+RMSE suskaičiuokite abiem duomenų masyvams trainSet ir testSet. Rezultatus sudėkite į lentelę. Palyginkite rezultatus ir padarykite išvadas.
+```{r}
+pre<-predict(fit,trainSet)
+error1<-trainSet$kaina-pre
+rmse(error1)->e1
+
+
+pre2<-predict(fit,testSet)
+error2<-testSet$kaina-pre2
+rmse(error2)->e2
+
+levels<-factor(c("trainSet", "testSet"))
+
+bubba<-data.frame(trainSet=e1, testSet=e2)
+bubba
+
+```
+Rezultatai beveik sutampa.
+
+b) Išbrėžkite sklaidos diagramą, kurioje $x$ ašyje būtų fit1 modelio testSet prognozė, o $y$ ašyje faktinės testSet kainų reikšmės. Ant šios sklaidos diagramos išbrėžkite dvi linijas, kurios žymėtų prognozės pasikliautinus intervalus (pasikliovimo lygmuo 90 proc.).
+```{r}
+plot(pre2, testSet$kaina, xlab = "prognoze", ylab = "faktines")
+
+y = coef(fit)
+x = seq_along(y)
+confint(fit, level=0.90)->ci
+plot(y, ylim=range(ci))
+arrows(x,ci[,1],x,ci[,2], code=3, angle=90, length=0.05)
+
+```
+
+
+
+c) Kiek procentų prognozuotų reikšmių nepateko į pasikliautinus intervalus?
+
+0%
