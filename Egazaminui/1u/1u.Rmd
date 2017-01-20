@@ -1,0 +1,29 @@
+---
+title: "1u"
+author: "Milda Pieškutė"
+date: '2017 m sausis 17 d '
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Užduotis 1 (numatyta 10 taškų)
+
+Darbas su duomenimis. Mokėti atlikti bazinius duomenų manimuliavimo užduotis. Suskaičiuoti charakteristikas, išsitraukti dominančius duomenis, išbrėžti grafiką ir panašiai. Visus užduotys bus išskaidytos į atskirus punktus.
+
+```{r, cars}
+cars
+names(cars)
+summary(cars)
+
+speed<-cars[,1]
+dist<-cars[,2]
+
+sapply(speed, sum)
+sum(speed)
+var(cars)
+var(speed)
+plot(cars)
+```
